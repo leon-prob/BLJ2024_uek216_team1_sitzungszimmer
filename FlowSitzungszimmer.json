@@ -1,0 +1,298 @@
+[
+    {
+        "id": "643b0e7ba9acc587",
+        "type": "tab",
+        "label": "Door",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "da67bfadc2e770da",
+        "type": "ui_text_input",
+        "z": "643b0e7ba9acc587",
+        "name": "",
+        "label": "Startzeit",
+        "tooltip": "",
+        "group": "dbb559a17b6462d8",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "zuerich/sitzungszimmer/reservation/startTime",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            [
+                "82cc701ed3a990ae"
+            ]
+        ]
+    },
+    {
+        "id": "318fa27d480b95d3",
+        "type": "ui_text_input",
+        "z": "643b0e7ba9acc587",
+        "name": "",
+        "label": "Endzeit",
+        "tooltip": "",
+        "group": "dbb559a17b6462d8",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "mode": "datetime-local",
+        "delay": 300,
+        "topic": "zuerich/sitzungszimmer/reservation/startTime",
+        "sendOnBlur": true,
+        "className": "",
+        "topicType": "msg",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "f0035c23e33de20e"
+            ]
+        ]
+    },
+    {
+        "id": "a03926f168528d76",
+        "type": "mqtt in",
+        "z": "643b0e7ba9acc587",
+        "name": "",
+        "topic": "zuerich/sitzungszimmer/sommer/openclosed",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b467710c2029931f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 470,
+        "y": 520,
+        "wires": [
+            [
+                "357e9199310351e3"
+            ]
+        ]
+    },
+    {
+        "id": "074043ceb5836f04",
+        "type": "mqtt out",
+        "z": "643b0e7ba9acc587",
+        "name": "",
+        "topic": "zuerich/sitzungszimmer/sommer/reservation",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "b467710c2029931f",
+        "x": 1290,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "7263e85330531f37",
+        "type": "mqtt in",
+        "z": "643b0e7ba9acc587",
+        "name": "",
+        "topic": "zuerich/sitzungszimmer/sommer/reservation",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "b467710c2029931f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 470,
+        "y": 360,
+        "wires": [
+            [
+                "0fa191c3c9f4e470"
+            ]
+        ]
+    },
+    {
+        "id": "0fa191c3c9f4e470",
+        "type": "ui_text",
+        "z": "643b0e7ba9acc587",
+        "group": "dbb559a17b6462d8",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "STATUS:",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 880,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "d4502cb17546d9b3",
+        "type": "ui_button",
+        "z": "643b0e7ba9acc587",
+        "name": "",
+        "group": "dbb559a17b6462d8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Reservieren/Freigeben",
+        "tooltip": "",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "",
+        "payloadType": "date",
+        "topic": "zuerich/sitzungszimmer/reservation/submit",
+        "topicType": "msg",
+        "x": 720,
+        "y": 160,
+        "wires": [
+            [
+                "ae6be48043a36b4d"
+            ]
+        ]
+    },
+    {
+        "id": "82cc701ed3a990ae",
+        "type": "function",
+        "z": "643b0e7ba9acc587",
+        "name": "function 4",
+        "func": "flow.set(\"startZeit\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f0035c23e33de20e",
+        "type": "function",
+        "z": "643b0e7ba9acc587",
+        "name": "function 5",
+        "func": "flow.set(\"endZeit\", msg.payload);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ae6be48043a36b4d",
+        "type": "function",
+        "z": "643b0e7ba9acc587",
+        "name": "function 6",
+        "func": "var correctedTime = new Date(msg.payload);\ncorrectedTime.setHours(correctedTime.getHours() + 1);\n\n\nif(flow.get(\"startZeit\") < correctedTime.getTime() && \n  flow.get(\"endZeit\") > correctedTime.getTime()) {\n    msg.payload = \"BESETZT\";\n} else  {\n\n    msg.payload = \"FREI\";\n}\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 980,
+        "y": 160,
+        "wires": [
+            [
+                "074043ceb5836f04"
+            ]
+        ]
+    },
+    {
+        "id": "357e9199310351e3",
+        "type": "ui_text",
+        "z": "643b0e7ba9acc587",
+        "group": "dbb559a17b6462d8",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Türe:",
+        "format": "{{value}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 890,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "dbb559a17b6462d8",
+        "type": "ui_group",
+        "name": "Standard",
+        "tab": "d7ff396eba923f1f",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "b467710c2029931f",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "10.10.2.127",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "d7ff396eba923f1f",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
